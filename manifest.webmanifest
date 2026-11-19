@@ -1,0 +1,13 @@
+{
+  "name": "God's Plan",
+  "short_name": "God's Plan",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#EFE2C4",
+  "theme_color": "#241C14",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

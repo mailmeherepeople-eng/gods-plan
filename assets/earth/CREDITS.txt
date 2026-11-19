@@ -1,0 +1,3 @@
+earth_day.jpg: NASA Blue Marble (public domain).
+Source: NASA Scientific Visualization Studio, https://svs.gsfc.nasa.gov/2915 (bluemarble-2048.png), converted to JPEG.
+Credit: NASA Goddard Space Flight Center.

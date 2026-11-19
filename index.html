@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- full screen on a phone: no page zoom (two fingers belong to the camera), under the notch, the browser's own bars hidden when it can -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, interactive-widget=overlays-content">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#cfd9dd">
+<!-- the parchment is the look: keep a phone browser's "dark mode for every site" from repainting it brown -->
+<meta name="color-scheme" content="only light">
+<style>:root { color-scheme: only light; }</style>
+<meta name="format-detection" content="telephone=no">
+<title>God's Plan</title>
+<!-- a tiny standing stone (the god's only sacred shape), inline so no request is made for /favicon.ico -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23EFE2C4'/%3E%3Cpath d='M11 27V12c0-5 2.2-8 5-8s5 3 5 8v15z' fill='%23A59D8F' stroke='%235A3824' stroke-width='2'/%3E%3Cpath d='M7 27.5h18' stroke='%235A3824' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='15' cy='13' r='1.3' fill='%235A3824'/%3E%3Ccircle cx='17.5' cy='18' r='1.3' fill='%235A3824'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="css/base.css">
+<script src="fs.js"></script>
+<link rel="modulepreload" href="src/config.js">
+<link rel="modulepreload" href="src/edit/core.js">
+<link rel="modulepreload" href="src/edit/vox.js">
+<link rel="modulepreload" href="src/engine/bus.js">
+<link rel="modulepreload" href="src/engine/clock.js">
+<link rel="modulepreload" href="src/engine/lighting.js">
+<link rel="modulepreload" href="src/engine/perf.js">
+<link rel="modulepreload" href="src/engine/post.js">
+<link rel="modulepreload" href="src/engine/renderer.js">
+<link rel="modulepreload" href="src/god/aim.js">
+<link rel="modulepreload" href="src/god/animals.js">
+<link rel="modulepreload" href="src/god/buttons.js">
+<link rel="modulepreload" href="src/god/cave.js">
+<link rel="modulepreload" href="src/god/draw.js">
+<link rel="modulepreload" href="src/god/index.js">
+<link rel="modulepreload" href="src/god/input.js">
+<link rel="modulepreload" href="src/god/land.js">
+<link rel="modulepreload" href="src/god/look.js">
+<link rel="modulepreload" href="src/god/path.js">
+<link rel="modulepreload" href="src/god/pending-look.js">
+<link rel="modulepreload" href="src/god/pending.js">
+<link rel="modulepreload" href="src/god/plugins.js">
+<link rel="modulepreload" href="src/god/power-strike.js">
+<link rel="modulepreload" href="src/god/powers-clans.js">
+<link rel="modulepreload" href="src/god/powers-minds.js">
+<link rel="modulepreload" href="src/god/powers-nature.js">
+<link rel="modulepreload" href="src/god/powers-resurrect.js">
+<link rel="modulepreload" href="src/god/sight.js">
+<link rel="modulepreload" href="src/god/tools.js">
+<link rel="modulepreload" href="src/god/trees.js">
+<link rel="modulepreload" href="src/main.js">
+<link rel="modulepreload" href="src/sim/animals.js">
+<link rel="modulepreload" href="src/sim/battle-field.js">
+<link rel="modulepreload" href="src/sim/battle-ground.js">
+<link rel="modulepreload" href="src/sim/battle-look.js">
+<link rel="modulepreload" href="src/sim/battle-tune.js">
+<link rel="modulepreload" href="src/sim/battle.js">
+<link rel="modulepreload" href="src/sim/berries.js">
+<link rel="modulepreload" href="src/sim/bodies.js">
+<link rel="modulepreload" href="src/sim/build.js">
+<link rel="modulepreload" href="src/sim/camp.js">
+<link rel="modulepreload" href="src/sim/caves.js">
+<link rel="modulepreload" href="src/sim/clans-look.js">
+<link rel="modulepreload" href="src/sim/clans-powers.js">
+<link rel="modulepreload" href="src/sim/clans-words.js">
+<link rel="modulepreload" href="src/sim/clans.js">
+<link rel="modulepreload" href="src/sim/commandments.js">
+<link rel="modulepreload" href="src/sim/devcave.js">
+<link rel="modulepreload" href="src/sim/devland.js">
+<link rel="modulepreload" href="src/sim/ecology.js">
+<link rel="modulepreload" href="src/sim/faith-tales.js">
+<link rel="modulepreload" href="src/sim/faith.js">
+<link rel="modulepreload" href="src/sim/fights-battle.js">
+<link rel="modulepreload" href="src/sim/fights-look.js">
+<link rel="modulepreload" href="src/sim/fights.js">
+<link rel="modulepreload" href="src/sim/fish-look.js">
+<link rel="modulepreload" href="src/sim/fish.js">
+<link rel="modulepreload" href="src/sim/fishing.js">
+<link rel="modulepreload" href="src/sim/food-season.js">
+<link rel="modulepreload" href="src/sim/forces-great.js">
+<link rel="modulepreload" href="src/sim/forces-prayers.js">
+<link rel="modulepreload" href="src/sim/forces.js">
+<link rel="modulepreload" href="src/sim/foresight.js">
+<link rel="modulepreload" href="src/sim/futures.js">
+<link rel="modulepreload" href="src/sim/gods.js">
+<link rel="modulepreload" href="src/sim/graves.js">
+<link rel="modulepreload" href="src/sim/hardship-fire.js">
+<link rel="modulepreload" href="src/sim/hardship-fx.js">
+<link rel="modulepreload" href="src/sim/hardship-sick.js">
+<link rel="modulepreload" href="src/sim/hardship-trouble.js">
+<link rel="modulepreload" href="src/sim/hardship-water.js">
+<link rel="modulepreload" href="src/sim/hardship.js">
+<link rel="modulepreload" href="src/sim/hunt-look.js">
+<link rel="modulepreload" href="src/sim/hunting.js">
+<link rel="modulepreload" href="src/sim/index.js">
+<link rel="modulepreload" href="src/sim/land.js">
+<link rel="modulepreload" href="src/sim/mind.js">
+<link rel="modulepreload" href="src/sim/move.js">
+<link rel="modulepreload" href="src/sim/people.js">
+<link rel="modulepreload" href="src/sim/plugins.js">
+<link rel="modulepreload" href="src/sim/power-strike.js">
+<link rel="modulepreload" href="src/sim/powers-nature-rain.js">
+<link rel="modulepreload" href="src/sim/powers-nature.js">
+<link rel="modulepreload" href="src/sim/powers.js">
+<link rel="modulepreload" href="src/sim/rain-size.js">
+<link rel="modulepreload" href="src/sim/rain-wind.js">
+<link rel="modulepreload" href="src/sim/resurrect.js">
+<link rel="modulepreload" href="src/sim/science-data.js">
+<link rel="modulepreload" href="src/sim/science-util.js">
+<link rel="modulepreload" href="src/sim/science.js">
+<link rel="modulepreload" href="src/sim/seam.js">
+<link rel="modulepreload" href="src/sim/season.js">
+<link rel="modulepreload" href="src/sim/shelter.js">
+<link rel="modulepreload" href="src/sim/skip.js">
+<link rel="modulepreload" href="src/sim/thoughts-given-list.js">
+<link rel="modulepreload" href="src/sim/thoughts-given.js">
+<link rel="modulepreload" href="src/sim/tune.js">
+<link rel="modulepreload" href="src/sim/turning.js">
+<link rel="modulepreload" href="src/sim/wind.js">
+<link rel="modulepreload" href="src/sim/words.js">
+<link rel="modulepreload" href="src/ui/attend.js">
+<link rel="modulepreload" href="src/ui/audit.js">
+<link rel="modulepreload" href="src/ui/battle.js">
+<link rel="modulepreload" href="src/ui/clanmap.js">
+<link rel="modulepreload" href="src/ui/closeup-watch.js">
+<link rel="modulepreload" href="src/ui/closeup.js">
+<link rel="modulepreload" href="src/ui/cursor.js">
+<link rel="modulepreload" href="src/ui/delight.js">
+<link rel="modulepreload" href="src/ui/discover.js">
+<link rel="modulepreload" href="src/ui/dom.js">
+<link rel="modulepreload" href="src/ui/doors.js">
+<link rel="modulepreload" href="src/ui/faith-fx.js">
+<link rel="modulepreload" href="src/ui/faith-panel.js">
+<link rel="modulepreload" href="src/ui/feed.js">
+<link rel="modulepreload" href="src/ui/fixtures.js">
+<link rel="modulepreload" href="src/ui/globe.js">
+<link rel="modulepreload" href="src/ui/index.js">
+<link rel="modulepreload" href="src/ui/inspect.js">
+<link rel="modulepreload" href="src/ui/marks.js">
+<link rel="modulepreload" href="src/ui/menu.js">
+<link rel="modulepreload" href="src/ui/outline.js">
+<link rel="modulepreload" href="src/ui/plugins.js">
+<link rel="modulepreload" href="src/ui/power.js">
+<link rel="modulepreload" href="src/ui/registry.js">
+<link rel="modulepreload" href="src/ui/s2.js">
+<link rel="modulepreload" href="src/ui/screens.js">
+<link rel="modulepreload" href="src/ui/signs-data.js">
+<link rel="modulepreload" href="src/ui/signs.js">
+<link rel="modulepreload" href="src/ui/slot.js">
+<link rel="modulepreload" href="src/ui/teach-words.js">
+<link rel="modulepreload" href="src/ui/teach.js">
+<link rel="modulepreload" href="src/ui/thought.js">
+<link rel="modulepreload" href="src/ui/time.js">
+<link rel="modulepreload" href="src/ui/title.js">
+<link rel="modulepreload" href="src/ui/tooltip.js">
+<link rel="modulepreload" href="src/ui/touch.js">
+<link rel="modulepreload" href="src/ui/tutorial-steps.js">
+<link rel="modulepreload" href="src/ui/tutorial.js">
+<link rel="modulepreload" href="src/ui/walk.js">
+<link rel="modulepreload" href="src/ui/world.js">
+<link rel="modulepreload" href="src/ui/xray.js">
+<link rel="modulepreload" href="src/view/camera.js">
+<link rel="modulepreload" href="src/view/controls.js">
+<link rel="modulepreload" href="src/view/overlay.js">
+<link rel="modulepreload" href="src/view/pick.js">
+<link rel="modulepreload" href="src/view/rain-look.js">
+<link rel="modulepreload" href="src/view/seasons.js">
+<link rel="modulepreload" href="src/view/walk.js">
+<link rel="modulepreload" href="src/view/wind.js">
+<link rel="modulepreload" href="src/world/atlas.js">
+<link rel="modulepreload" href="src/world/blocks.js">
+<link rel="modulepreload" href="src/world/genassess.js">
+<link rel="modulepreload" href="src/world/generate.js">
+<link rel="modulepreload" href="src/world/gennoise.js">
+<link rel="modulepreload" href="src/world/gentrees.js">
+<link rel="modulepreload" href="src/world/merge.js">
+<link rel="modulepreload" href="src/world/mesher.js">
+<link rel="modulepreload" href="src/world/noise.js">
+<link rel="modulepreload" href="src/world/shade.js">
+<link rel="modulepreload" href="src/world/voxel.js">
+<link rel="modulepreload" href="vendor/three.core.js">
+<link rel="modulepreload" href="vendor/three.module.js">
+<link rel="preload" as="style" href="src/ui/battle.css">
+<link rel="preload" as="style" href="src/ui/faith.css">
+<link rel="preload" as="style" href="src/ui/screen.css">
+<link rel="preload" as="style" href="src/ui/tokens.css">
+<link rel="preload" as="style" href="src/ui/walk.css">
+</head>
+<body>
+  <!-- the world; the camera takes the right and middle buttons, the wheel and two fingers; tools take the left button and one finger -->
+  <canvas id="view" tabindex="0"></canvas>
+  <!-- HTML labels drawn by view/overlay.js (never takes the mouse) -->
+  <div id="labels"></div>
+  <!-- the HUD and screens (src/ui/). Passes the mouse through except where a child sets pointer-events: auto -->
+  <div id="ui"></div>
+  <div id="boot-error" hidden></div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

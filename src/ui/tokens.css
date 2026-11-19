@@ -1,0 +1,78 @@
+/* HUD design tokens (docs/UI-GUIDE.md section 2, and the skin tokens the HUD uses). Colours, type, timings:
+   a different skin is a change to this file only. Where each part stands is screen.css. */
+:root {
+  /* surfaces and text */
+  --ink: #2A2118; --ink-soft: #5A4A3A;
+  --parchment: #EFE2C4;
+  --parchment-deep: #E3D3AE; --parchment-hi: #F7EED9;
+  --clay: #8C5A3C; --clay-dark: #5A3824; --clay-light: #B27A55;
+  /* meaning */
+  --gold: #E5AE3C; --gold-ink: #7A5414;
+  --alarm: #C7442E; --warn: #C98A1E;
+  --woad: #3E78B2;
+  --creation: #5C8FB8;
+  --seen: rgba(244, 227, 161, 0.32); --seen-edge: #7A5A1E;
+  /* per-person meters: colour plus pattern plus glyph, never colour alone */
+  --m-happy: #6E9A3A; --m-faith: #E5AE3C; --m-doubt: #3E78B2;
+  /* world palette */
+  --meadow: #8FAE4F; --forest: #4E7442; --dry: #D9C185; --stone: #A59D8F; --shallow: #6DB6AE;
+  --deep: #2E6E86; --thatch: #C99C4E; --mudbrick: #C48560; --shadow-tint: #4B4A78;
+  --earth: #8A6A48;
+  --mist: #CFD9DD;
+  --space: #05070D; --space-hi: #0F1626; --space-shade: rgba(0, 0, 0, 0.6); /* the window round the globe */
+  /* type */
+  --f-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --f-ui: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+  --f-hand: "Patrick Hand", "Segoe Print", "Bradley Hand", "Comic Neue", cursive;
+  --t-badge: 600 13px/15px var(--f-ui);
+  --t-label: 600 14px/18px var(--f-ui);
+  --t-body: 400 15px/21px var(--f-ui);
+  --t-ui: 600 16px/22px var(--f-ui);  --t-num: 700 18px/20px var(--f-ui);
+  --t-title: 600 20px/26px var(--f-display);  --t-date: 700 24px/28px var(--f-display);
+  --t-head: 700 28px/32px var(--f-display);   --t-banner: 800 56px/60px var(--f-display);
+  --t-aside: 400 16px/20px var(--f-hand);
+  /* spacing, radii, borders, shadows */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px;
+  --edge: 16px;
+  --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-pill: 999px;
+  --b-panel: 2px solid var(--clay);  --focus: 0 0 0 2px var(--parchment), 0 0 0 4px var(--gold);
+  --sh-panel: 0 2px 0 rgba(42, 33, 24, 0.25), 0 8px 24px rgba(42, 33, 24, 0.18);
+  --sh-pop: 0 4px 0 rgba(42, 33, 24, 0.25), 0 12px 32px rgba(42, 33, 24, 0.28);
+  --sh-inset: inset 0 1px 0 var(--clay-light), inset 0 -1px 0 var(--clay-dark);
+  /* z layers */
+  --z-canvas: 0; --z-frame: 50; --z-worldtags: 60; --z-hud: 100; --z-panel: 110; --z-feed: 120;
+  --z-card: 200; --z-tooltip: 220; --z-cursorchip: 230; --z-scrim: 900; --z-menu: 910; --z-fatal: 1000;
+  /* motion */
+  --d-micro: 80ms; --d-fast: 120ms; --d-base: 200ms; --d-slow: 320ms; --d-glide: 400ms; --d-banner: 900ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1); --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- skin: what each part is painted with (swap these for another material) ---- */
+  --panel-bg: var(--parchment);
+  --panel-ink: var(--ink);
+  --btn-bg: var(--parchment-deep);
+  --btn-hover: var(--parchment-hi);
+  --btn-line: var(--clay-light);
+  --btn-on: var(--gold);
+  --btn-on-ink: var(--ink);
+  --btn-on-bar: var(--clay);
+  --badge-bg: var(--parchment-hi);
+  --badge-ink: var(--ink-soft);
+  --tip-bg: var(--parchment-deep);
+  --track: var(--parchment-deep);
+  --rule: rgba(140, 90, 60, 0.45);              /* clay hairlines between groups */
+  --pattern-light: rgba(255, 255, 255, 0.5);    /* dots on the doubt bar */
+  --pattern-dark: rgba(42, 33, 24, 0.38);       /* hatch on the faith bar */
+  --scrim: transparent;                         /* nothing washes over the world, the menu included (the director) */
+  --flash: rgba(255, 255, 255, 0.35);
+  --night-max: 0.22;     /* the cool layer's strength at full night (the darkening itself is a filter on the canvas) */
+  --night-tint: #1A2550; /* deep night blue: multiplying by it darkens without washing out */
+  --icon-fill: 0.22;
+  /* a faint paper grain and an invented zigzag motif, drawn here so they are part of the skin */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.22 0 0 0 0 0.12 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6'%3E%3Cpath d='M0 5 3 1 6 5 9 1 12 5' fill='none' stroke='%238C5A3C' stroke-width='1.2' stroke-opacity='.55'/%3E%3C/svg%3E");
+  --dotrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4'%3E%3Ccircle cx='2' cy='2' r='1.1' fill='%238C5A3C' fill-opacity='.55'/%3E%3C/svg%3E");
+
+}
+@media (prefers-reduced-motion: reduce) { :root { --d-slow: 120ms; --d-glide: 120ms; --d-banner: 200ms; } }

@@ -1,0 +1,78 @@
+/* Faith on the map (faith-fx.js) and the faith ledger (faith-panel.js). Tokens from tokens.css. */
+
+/* ---------- on the map ---------- */
+.ffx { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.ffx-mark, .ffx-sum, .ffx-dot { position: absolute; left: 0; top: 0; will-change: transform, opacity; }
+.ffx-mark {
+  display: inline-flex; align-items: center; gap: 2px; padding: 0 6px 0 3px; border-radius: var(--r-pill);
+  background: var(--parchment-hi); border: 1.5px solid var(--gold-ink); color: var(--gold-ink);
+  font: 700 13px/18px var(--f-ui); white-space: nowrap; box-shadow: 0 1px 0 rgba(42, 33, 24, 0.35);
+}
+.ffx-mark .ic { color: var(--m-faith); }
+.ffx-mark.far { border-style: dashed; }
+.ffx-mark.dbt { border-color: var(--m-doubt); color: var(--m-doubt); }
+.ffx-mark.dbt .ic { color: var(--m-doubt); }
+.ffx-sum {
+  display: flex; flex-direction: column; align-items: center; gap: 1px; width: max-content; max-width: 380px; padding: 4px 12px 5px;
+  border-radius: var(--r-md); background: var(--parchment); border: 2px solid var(--gold-ink); box-shadow: var(--sh-pop);
+  font: 600 14px/19px var(--f-ui); color: var(--ink); text-align: center;
+}
+.ffx-sum.k-doubt { border-color: var(--m-doubt); }
+.ffx-s1 { display: inline-flex; align-items: center; gap: 5px; }
+.ffx-s1 .ic { color: var(--gold-ink); flex: none; }
+.ffx-s2 { font-weight: 400; font-size: 13px; color: var(--ink-soft); }
+.ffx-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--m-faith); box-shadow: 0 0 0 2px rgba(247, 238, 217, 0.85), 0 0 8px 2px rgba(229, 174, 60, 0.55); }
+.ffx-dot.dbt { background: var(--m-doubt); box-shadow: 0 0 0 2px rgba(247, 238, 217, 0.85), 0 0 8px 2px rgba(62, 120, 178, 0.5); }
+
+/* ---------- the links in the balance breakdown ---------- */
+.bp-faith { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2); padding-top: var(--s-2); border-top: 1px solid var(--rule); }
+.bp-faith .btn { font: 600 14px/18px var(--f-ui); }
+
+/* ---------- the ledger ---------- */
+.fpanel {
+  /* the ledger stands where the side sheet stands (it is opened from the World), the whole height */
+  position: absolute; z-index: 4; right: var(--R); top: var(--T); width: var(--sheet); max-width: calc(100vw - var(--L) - var(--R));
+  height: calc(var(--vh) - var(--T) - var(--B)); display: flex; flex-direction: column; padding: 6px 10px 8px;
+  background-color: var(--parchment); background-image: var(--grain); border: 1.5px solid var(--clay-light); border-radius: 12px; box-shadow: var(--sh-pop); color: var(--ink);
+}
+.fpanel[hidden] { display: none; }
+.fp-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); padding-bottom: 6px; background: var(--zigzag) repeat-x left bottom / 12px 6px; flex: none; }
+.fp-head > .ic { color: var(--gold-ink); flex: none; }
+.fp-title { font: var(--t-title); white-space: nowrap; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.fp-tabs { display: inline-flex; gap: 4px; flex: none; }
+.fp-t { font: 600 13px/18px var(--f-ui); min-height: 44px; padding: 0 8px; }
+.fp-t.on { border-color: var(--gold-ink); background: var(--parchment-hi); }
+.fp-x { flex: none; min-width: 44px; min-height: 44px; padding: 0; }
+.fp-body { overflow-y: auto; overscroll-behavior: contain; padding-right: 4px; margin-top: 6px; font: var(--t-body); }
+.fp-chart { margin: 0 0 6px; }
+.fp-chart > svg { display: block; width: 100%; height: auto; background: var(--parchment-hi); border-radius: 4px; box-shadow: inset 0 0 0 1px var(--rule); }
+.fp-chart .fp-f { fill: none; stroke: var(--m-faith); stroke-width: 2.5; stroke-linejoin: round; }
+.fp-chart .fp-d { fill: none; stroke: var(--m-doubt); stroke-width: 2; stroke-dasharray: 5 3; stroke-linejoin: round; }
+.fp-chart .fp-grid { stroke: var(--rule); stroke-width: 1; }
+.fp-chart .fp-act { stroke: var(--clay-light); stroke-width: 1.5; stroke-dasharray: 2 3; }
+.fp-chart figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-top: 3px; font: 600 13px/17px var(--f-ui); }
+.fp-key { display: inline-flex; align-items: center; gap: 3px; }
+.fp-key.f .ic { color: var(--m-faith); } .fp-key.d .ic { color: var(--m-doubt); }
+.fp-key.a i { display: inline-block; width: 0; height: 12px; border-left: 2px dashed var(--clay-light); }
+.fp-span { margin-left: auto; font-weight: 400; color: var(--ink-soft); }
+.fp-now, .fp-p { margin: 4px 0 6px; }
+.fp-now b.bad { color: var(--alarm); }
+.fp-h { margin: 10px 0 3px; font: 700 14px/18px var(--f-ui); color: var(--clay-dark); }
+.fp-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.fp-list li { padding-left: 10px; border-left: 3px solid var(--m-faith); }
+.fp-list li.neg { border-left-color: var(--m-doubt); }
+.fp-list.plain li { border-left-color: var(--clay-light); }
+.fp-y { font: 600 13px/16px var(--f-ui); color: var(--ink-soft); margin-right: 6px; white-space: nowrap; }
+.fp-rows { display: flex; flex-direction: column; gap: 3px; margin: 4px 0; }
+.fp-row { display: grid; grid-template-columns: minmax(0, 150px) 1fr 62px; gap: var(--s-2); align-items: center; }
+.fp-l { font: 600 13px/17px var(--f-ui); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-l small { font-weight: 400; color: var(--ink-soft); }
+.fp-n { font: 600 13px/17px var(--f-ui); text-align: right; white-space: nowrap; }
+.fp-bar, .fp-bal { position: relative; height: 10px; border-radius: 3px; background: var(--track); box-shadow: inset 0 0 0 1px var(--rule); overflow: hidden; }
+.fp-bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--clay-light); }
+.fp-bal { background: var(--m-doubt); }
+.fp-bal i.f { position: absolute; left: 0; top: 0; bottom: 0; background: var(--m-faith); }
+.fp-note { margin: 2px 0 4px; font-size: 13px; color: var(--ink-soft); }
+.fp-how p { margin: 4px 0 6px; }
+}
+@media (prefers-reduced-motion: reduce) { .ffx-dot { display: none; } }

@@ -1,0 +1,70 @@
+/* Walking among the people (ui/walk.js, view/walk.js, docs/WALK.md). One attribute, data-walk="1" on #ui and <html>,
+   turns the home screen into the walking screen: the time box, the tokens with Leave, the Log and the Menu stay at the
+   top; the stick (bottom left) and Jump (bottom right) come on a touch screen; everything that belongs to the god's
+   view goes. The stick and Jump sit where the other game has them. Nothing is shrunk; every target is 44 px or more. */
+
+/* ---------- what goes while walking ---------- */
+#ui[data-walk="1"] .hud-world,
+html[data-walk="1"] #labels,
+.hud[data-walk="1"] .door,
+.hud[data-walk="1"] .strip,
+.hud[data-walk="1"] .modes,
+.hud[data-walk="1"] .hist,
+.hud[data-walk="1"] .knobs,
+.hud[data-walk="1"] .forcesb,
+.hud[data-walk="1"] .startbtn,
+.hud[data-walk="1"] .startwarn,
+.hud[data-walk="1"] .lesson,
+.hud[data-walk="1"] .ring8,
+.hud[data-walk="1"] .compass,
+.hud[data-walk="1"] .cchip,
+.hud[data-walk="1"] .bt-chip,
+.hud[data-walk="1"] .in-acts,
+.hud[data-walk="1"] .in-follow,
+.hud[data-walk="1"] .in-walk { display: none !important; }
+
+/* ---------- Leave: a small button in the top right row, before the Log and the Menu ---------- */
+.walk-leave {
+  height: var(--tap); padding: 0 14px 0 10px; gap: 6px; border-radius: 22px;
+  background: var(--parchment); border: 1.5px solid var(--clay); box-shadow: var(--sh-btn);
+  font: 700 15px/18px var(--f-ui);
+}
+.walk-leave:hover:not(:disabled) { background: var(--parchment-hi); }
+
+/* ---------- Jump: round, under the right thumb (the other game: 66 px, 30 px in, 40 px up) ---------- */
+.walk-jump {
+  position: absolute; right: calc(var(--R) + 14px); bottom: calc(var(--B) + 24px); width: 66px; height: 66px; padding: 0;
+  border-radius: 50%; flex-direction: column; gap: 0;
+  background: var(--parchment); border: 1.5px solid var(--clay); box-shadow: var(--sh-panel);
+  font: 700 13px/15px var(--f-ui); letter-spacing: 0.02em; touch-action: none;
+}
+.walk-jump .ic { width: 18px; height: 18px; margin-bottom: 1px; }
+.walk-jump.down { background: var(--gold); transform: translateY(1px); }
+/* a card open on the right covers that corner: Jump waits until it closes */
+.hud[data-walk="1"][data-sheet]:not([data-sheet=""]) .walk-jump { display: none; }
+
+/* ---------- the layer on the world: the stick, the names ---------- */
+.walk-layer { position: fixed; inset: 0; z-index: var(--z-worldtags); pointer-events: none; overflow: hidden; font: 400 15px/20px var(--f-ui); color: var(--ink); }
+.walk-layer[hidden], .walk-layer [hidden] { display: none !important; }
+/* the stick: it stays where it is, bottom left (the other game: 118 px across, 26 px in and up); the knob follows the thumb */
+.walk-joy { position: absolute; left: calc(var(--L) + 10px); bottom: calc(var(--B) + 10px); width: 118px; height: 118px; box-sizing: border-box; border-radius: 50%;
+  border: 2px solid rgba(255, 248, 232, 0.8); background: rgba(42, 33, 24, 0.2); box-shadow: 0 0 0 1px rgba(42, 33, 24, 0.3), inset 0 0 18px rgba(42, 33, 24, 0.2); }
+.walk-nub { position: absolute; left: 50%; top: 50%; width: 48px; height: 48px; border-radius: 50%; transform: translate(-50%, -50%);
+  background: var(--parchment); border: 1.5px solid var(--clay); box-shadow: var(--sh-btn); }
+/* the middle of the view, while the mouse is handed to it */
+.walk-dot { position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: rgba(255, 248, 232, 0.9); box-shadow: 0 0 0 1.5px rgba(42, 33, 24, 0.6); }
+/* a name over a head */
+.walk-name { position: absolute; left: 0; top: 0; display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; margin-top: -6px; border-radius: 10px;
+  background: var(--parchment); border: 1.5px solid var(--clay-light); box-shadow: var(--sh-btn); font: 600 14px/18px var(--f-ui); white-space: nowrap; will-change: transform; }
+.walk-name .wn-sw { width: 8px; height: 14px; border-radius: 3px; background: var(--dye); box-shadow: inset 0 0 0 1px rgba(42, 33, 24, 0.3); }
+.walk-name.great { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(229, 174, 60, 0.45), var(--sh-btn); }
+
+/* the hint sits low, between the stick and Jump, so it never covers who you are looking at */
+.hud[data-walk="1"] .hchip { bottom: var(--B); max-width: min(460px, calc(100vw - 2 * (var(--L) + 150px))); }
+/* with a card open the hint gives way */
+.hud[data-walk="1"][data-sheet]:not([data-sheet=""]) .hchip { display: none; }
+
+/* ---------- the cross-fade (Less motion) ---------- */
+.walk-fade { position: fixed; inset: 0; z-index: var(--z-worldtags); opacity: 0; }
+/* (base.css gives every child of #ui the pointer: these two never take it) */
+#ui > .walk-fade, #ui > .walk-layer { pointer-events: none; }

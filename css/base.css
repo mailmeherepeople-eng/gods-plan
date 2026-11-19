@@ -1,0 +1,16 @@
+/* The page frame only. Feature styles live with their folder and are loaded
+   with ctx.addStyle(new URL('./x.css', import.meta.url)).
+   Phones: the page never scrolls, bounces, zooms or picks up text; the canvas takes every touch (ui/touch.js). */
+:root { --mist: #cfd9dd; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--mist); overscroll-behavior: none; touch-action: none; }
+body { font: 14px/1.4 system-ui, sans-serif; color: #1d2328; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; position: fixed; inset: 0; }
+#view { position: fixed; inset: 0; width: 100vw; height: 100vh; height: 100dvh; display: block; outline: none; touch-action: none; user-select: none; -webkit-user-select: none; }
+#labels { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+#labels .label {
+  position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none;
+  padding: 1px 6px; border-radius: 4px; font-size: 12px;
+  background: rgba(20, 24, 28, 0.72); color: var(--c, #fff);
+}
+#ui { position: fixed; inset: 0; pointer-events: none; }
+#ui > * { pointer-events: auto; }
+#boot-error { position: fixed; left: 16px; top: 16px; padding: 8px 12px; background: #fff; border-radius: 6px; }
